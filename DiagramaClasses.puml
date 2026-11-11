@@ -1,0 +1,55 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Endereco {
+  +logradouro: string
+  +numero: number
+  +cidade: string
+  +uf: string
+  +Endereco(logradouro, numero, cidade, uf)
+  +toString(): string
+}
+
+class Pessoa {
+  -nome: string
+  +endereco: Endereco
+  +Pessoa(nome, endereco)
+  +get nome(): string
+  +set nome(valor: string)
+  +validarTamanho(valor, tamanho, rotulo): string
+  +toString(): string
+}
+
+class PessoaFisica {
+  -cpf: string
+  -dataNascimento: Date
+  +PessoaFisica(nome, endereco, cpf, dataNascimento)
+  +get cpf(): string
+  +set cpf(valor: string)
+  +get dataNascimento(): Date
+  +set dataNascimento(valor)
+  +toString(): string
+}
+
+class PessoaJuridica {
+  -cnpj: string
+  -razaoSocial: string
+  +PessoaJuridica(nome, endereco, cnpj, razaoSocial)
+  +get cnpj(): string
+  +set cnpj(valor: string)
+  +get razaoSocial(): string
+  +set razaoSocial(valor: string)
+  +toString(): string
+}
+
+Pessoa <|-- PessoaFisica
+Pessoa <|-- PessoaJuridica
+Pessoa --> "1" Endereco : endereco
+
+note bottom
+  Visibilidade UML: + público, - privado, # protegido.
+  Os campos escritos com # no JavaScript (por exemplo, #cpf)
+  são privados; no diagrama UML aparecem com -.
+  Não há membros protegidos neste código.
+end note
+@enduml
